@@ -1,7 +1,7 @@
 import { StartGameScreenData } from "@polusgg/plugin-polusgg-api/src/services/roleManager/roleManagerService";
 import { EdgeAlignments } from "@polusgg/plugin-polusgg-api/src/types/enums/edgeAlignment";
 import { BaseManager } from "@polusgg/plugin-polusgg-api/src/baseManager/baseManager";
-import { RoleMetadata } from "@polusgg/plugin-polusgg-api/src/baseRole/baseRole";
+import { RoleAlignment, RoleMetadata } from "@polusgg/plugin-polusgg-api/src/baseRole/baseRole";
 import { GameDataPacket } from "@nodepolus/framework/src/protocol/packets/root";
 import { Button } from "@polusgg/plugin-polusgg-api/src/services/buttonManager";
 import { ServiceType } from "@polusgg/plugin-polusgg-api/src/types/enums";
@@ -13,12 +13,14 @@ import { PlayerRole } from "@nodepolus/framework/src/types/enums";
 import { Player } from "@nodepolus/framework/src/player";
 import { Server } from "@nodepolus/framework/src/server";
 import { assetBundle } from ".";
+import { Vector2 } from "@nodepolus/framework/src/types";
 
 declare const server: Server;
 
 export class HotPotatoRole extends BaseRole {
   protected readonly metadata: RoleMetadata = {
     name: "HotPotato",
+    alignment: RoleAlignment.Impostor,
   };
 
   protected button!: Button;
@@ -60,7 +62,7 @@ export class HotPotatoRole extends BaseRole {
       return;
     }
 
-    this.potatoImage = new EntityImage(this.owner.getLobby(), assetBundle.getSafeAsset(POTATO_ASSET).getId(), this.potatoAttachedTo.getPosition());
+    this.potatoImage = new EntityImage(this.owner.getLobby(), assetBundle.getSafeAsset("Assets/HotPotato/HotPotato.prefab").getId(), this.potatoAttachedTo.getPosition());
   }
 
   protected blowUpPotato(): void {
@@ -85,8 +87,11 @@ export class HotPotatoRole extends BaseRole {
     Services.get(ServiceType.RoleManager).setBaseRole(this.owner as Player, PlayerRole.Impostor);
 
     this.button = await Services.get(ServiceType.Button).spawnButton(this.owner.getConnection()!, {
-      asset: assetBundle.getSafeAsset(ASSET_NAME),
-      position: EdgeAlignments.LeftBottom,
+      asset: assetBundle.getSafeAsset("Assets/HotPotato/PrimePotato.png"),
+      alignment: EdgeAlignments.LeftBottom,
+      position: new Vector2(0.7, 0.7),
+      currentTime: 15,
+      isCountingDown: true,
       maxTimer: 15,
     });
 
