@@ -6,7 +6,7 @@ import { HotPotatoRole } from "./hotPotatoRole";
 import { RoleAssignmentData } from "@polusgg/plugin-polusgg-api/src/services/roleManager/roleManagerService";
 
 const pluginMetadata: PluginMetadata = {
-  name: "Polus.gg Hot Potato Plugin",
+  name: "Hot Potato",
   version: [1, 0, 0],
   authors: [
     {
