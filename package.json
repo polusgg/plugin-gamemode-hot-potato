@@ -1,7 +1,7 @@
 {
   "name": "@polusgg/plugin-gamemode-hot-potato",
   "np-plugin": true,
-  "version": "1.0.1-1",
+  "version": "1.0.1-2",
   "description": "Polus.gg Hot Potato gamemode plugin for NodePolus",
   "repository": {
     "type": "git",
